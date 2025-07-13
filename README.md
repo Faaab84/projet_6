@@ -13,5 +13,5 @@ Ensuite, ouvrez une console, placez-vous dans le dossier de votre choix et clone
 ```
 git clone https://github.com/Faaab84/projet_6.git
 ```
-
+Apres avoir lancé le serveur API. Vous pouvez executer ce dépôt : 
 Une fois le serveur API lancé, ouvrez le fichier `index.html` dans votre navigateur pour accéder au site JustStreamIt.
