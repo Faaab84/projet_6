@@ -1,0 +1,63 @@
+/* Mobile first: 1 film/ligne, 2 affichés */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Tablette (≥576px): 2 films/ligne, 4 affichés */
+@media (min-width: 576px) {
+    .col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* PC (≥992px): 3 films/ligne, 6 affichés */
+@media (min-width: 992px) {
+    .col {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+    .voir-plus {
+        display: none !important;
+    }
+}
+
+/* Modale */
+#modal > div {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Bouton Voir plus */
+.voir-plus {
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+/* Amélioration des cartes de films */
+.card {
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Espacement des sections */
+section {
+    margin-bottom: 2rem;
+}

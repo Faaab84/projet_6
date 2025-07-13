@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustStreamIt - Vidéos à la demande</title>
+    <link rel="stylesheet" href="./static/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/styles.css">
+</head>
+<body class="bg-light font-sans">
+    <header class="bg-secondary p-2 text-center text-white">
+        <img src="./static/logo_dark.png" alt="JustStreamIt Logo" height="60">
+            JustStreamIt - Vidéos à la demande
+
+    </header>
+
+    <main class="container my-5">
+        <!-- Section Meilleur Film -->
+        <h1 class="h4 fw-bold">Meilleur film</h1>
+        <section class="bg-white p-4 mb-4 border rounded">
+        <div class="row align-items-start">
+            <div class="col-md-4">
+                <img id="movie-image" alt="Movie Poster" class="img-fluid" style="max-width: 1000px;">
+            </div>
+            <div class="col-md-8">
+                <h3 id="top-title" class="h2 fw-bold mb-3"></h3>
+                <p id="movie-description"></p>
+            </div>
+        </div>
+        </section>
+
+        <!-- Section Meilleurs Films -->
+        <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Films les mieux notés </h2>
+            <div id="top-movies" class="row row-cols-1 g-2 mt-3"></div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary voir-plus" data-category="top-movies">Voir plus</button>
+            </div>
+        </section>
+
+        <!-- Section Catégorie War -->
+        <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Catégorie : Les Films De Guerres</h2>
+            <div id="category-war" class="row row-cols-1 g-2 mt-3"></div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary voir-plus" data-category="category-war">Voir plus</button>
+            </div>
+        </section>
+
+        <!-- Section Catégorie Horror -->
+        <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Catégorie : Les Films D'Horreurs</h2>
+            <div id="category-horror" class="row row-cols-1 g-2 mt-3"></div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary voir-plus" data-category="category-horror">Voir plus</button>
+            </div>
+        </section>
+
+        <!-- Section Catégorie 3 -->
+        <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Catégorie 3</h2>
+            <select id="genre-select" class="form-select mb-3 mx-auto" style="width: auto;">
+                <option value="">Choisir un genre</option>
+            </select>
+            <div id="category-3" class="row row-cols-1 g-2 mt-3"></div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary voir-plus" data-category="category-3">Voir plus</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup -->
+    <div id="modal" class="d-none position-fixed top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+        <div class="bg-white mx-auto my-5 p-4 rounded text-center" style="width: 70%; max-width: 500px;">
+            <span class="float-end fs-3 cursor-pointer" onclick="closeModal()">×</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="./static/script.js"></script>
+</body>
+</html>
