@@ -1,4 +1,4 @@
-/* Mobile first: 1 film/ligne, 2 affichés */
+/* Mobile 1: */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -14,7 +14,7 @@
     display: none !important;
 }
 
-/* Tablette (≥576px): 2 films/ligne, 4 affichés */
+/* Tablette (≥576px) */
 @media (min-width: 576px) {
     .col {
         flex: 0 0 50%;
@@ -22,7 +22,7 @@
     }
 }
 
-/* PC (≥992px): 3 films/ligne, 6 affichés */
+/* PC (≥992px) */
 @media (min-width: 992px) {
     .col {
         flex: 0 0 33.333%;
@@ -46,7 +46,7 @@
     display: block;
 }
 
-/* Amélioration des cartes de films */
+
 .card {
     border: 1px solid #dee2e6;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,7 +57,7 @@
     transform: translateY(-5px);
 }
 
-/* Espacement des sections */
+/* Espacement */
 section {
     margin-bottom: 2rem;
 }

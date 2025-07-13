@@ -20,7 +20,7 @@
         <section class="bg-white p-4 mb-4 border rounded">
         <div class="row align-items-start">
             <div class="col-md-4">
-                <img id="movie-image" alt="Movie Poster" class="img-fluid" style="max-width: 1000px;">
+                <img id="movie-image" alt="Movie Poster" class="img-fluid" style="max-width: 1000px;" src="">
             </div>
             <div class="col-md-8">
                 <h3 id="top-title" class="h2 fw-bold mb-3"></h3>
@@ -30,8 +30,8 @@
         </section>
 
         <!-- Section Meilleurs Films -->
+        <h2 class="h4 fw-bold">Films les mieux notés </h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
-            <h2 class="h4 fw-bold">Films les mieux notés </h2>
             <div id="top-movies" class="row row-cols-1 g-2 mt-3"></div>
             <div class="text-center mt-3">
                 <button class="btn btn-primary voir-plus" data-category="top-movies">Voir plus</button>
@@ -39,8 +39,9 @@
         </section>
 
         <!-- Section Catégorie War -->
+        <h2 class="h4 fw-bold">Catégorie : Guerres</h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
-            <h2 class="h4 fw-bold">Catégorie : Les Films De Guerres</h2>
+
             <div id="category-war" class="row row-cols-1 g-2 mt-3"></div>
             <div class="text-center mt-3">
                 <button class="btn btn-primary voir-plus" data-category="category-war">Voir plus</button>
@@ -48,8 +49,8 @@
         </section>
 
         <!-- Section Catégorie Horror -->
+        <h2 class="h4 fw-bold">Catégorie : Horreurs</h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
-            <h2 class="h4 fw-bold">Catégorie : Les Films D'Horreurs</h2>
             <div id="category-horror" class="row row-cols-1 g-2 mt-3"></div>
             <div class="text-center mt-3">
                 <button class="btn btn-primary voir-plus" data-category="category-horror">Voir plus</button>
@@ -57,9 +58,9 @@
         </section>
 
         <!-- Section Catégorie 3 -->
+        <h2 class="h4 fw-bold">Catégorie : Autres</h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
-            <h2 class="h4 fw-bold">Catégorie 3</h2>
-            <select id="genre-select" class="form-select mb-3 mx-auto" style="width: auto;">
+            <label for="genre-select"></label><select id="genre-select" class="form-select mb-3 mx-auto" style="width: auto;">
                 <option value="">Choisir un genre</option>
             </select>
             <div id="category-3" class="row row-cols-1 g-2 mt-3"></div>
