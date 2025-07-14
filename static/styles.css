@@ -1,4 +1,4 @@
-/* Mobile 1: */
+/* Styles pour mobile (1 film par ligne, 2 visibles) */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -10,43 +10,72 @@
     margin-bottom: 1rem;
 }
 
-.hidden {
-    display: none !important;
+/* Masquer les films après le 2e sur mobile */
+@media (max-width: 767.98px) {
+    .row .col:nth-child(n + 3) {
+        display: none;
+    }
 }
 
-/* Tablette (≥576px) */
-@media (min-width: 576px) {
+/* Styles pour tablette (2 films par ligne, 4 visibles) */
+@media (min-width: 768px) and (max-width: 991.98px) {
     .col {
         flex: 0 0 50%;
         max-width: 50%;
     }
+    .row .col:nth-child(n + 5) {
+        display: none;
+    }
 }
 
-/* PC (≥992px) */
+/* Styles pour PC (3 films par ligne, 6 visibles) */
 @media (min-width: 992px) {
     .col {
-        flex: 0 0 33.333%;
-        max-width: 33.333%;
+        flex: 0 0 calc(100% / 3);
+        max-width: calc(100% / 3);
+    }
+    .row .col {
+        display: block !important;
     }
     .voir-plus {
         display: none !important;
     }
 }
 
-/* Modale */
+/* Afficher tous les films quand la case à cocher est cochée */
+section:has(.toggle-checkbox:checked) .row .col {
+    display: block !important;
+}
+
+/* Styles pour le bouton Voir plus/Voir moins */
+.voir-plus {
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    display: block;
+    cursor: pointer;
+}
+
+/* Changer le texte du bouton selon l'état */
+.toggle-checkbox:checked + .voir-plus::after {
+    content: "Voir moins";
+}
+
+.voir-plus::after {
+    content: "Voir plus";
+}
+
+/* Cacher la case à cocher */
+.toggle-checkbox {
+    display: none;
+}
+
+/* Styles pour la modale */
 #modal > div {
     max-height: 80vh;
     overflow-y: auto;
 }
 
-/* Bouton Voir plus */
-.voir-plus {
-    margin: 1rem auto;
-    padding: 0.5rem 1rem;
-    display: block;
-}
-
-
+/* Styles pour les cartes de films */
 .card {
     border: 1px solid #dee2e6;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,7 +86,12 @@
     transform: translateY(-5px);
 }
 
-/* Espacement */
+/* Espacement des sections */
 section {
     margin-bottom: 2rem;
+}
+
+/* Curseur pour le bouton de fermeture du modal */
+.cursor-pointer {
+    cursor: pointer;
 }

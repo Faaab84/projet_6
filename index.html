@@ -10,63 +10,57 @@
 <body class="bg-light font-sans">
     <header class="bg-secondary p-2 text-center text-white">
         <img src="./static/logo_dark.png" alt="JustStreamIt Logo" height="60">
-            JustStreamIt - Vidéos à la demande
-
+        JustStreamIt - Vidéos à la demande
     </header>
 
     <main class="container my-5">
         <!-- Section Meilleur Film -->
-        <h1 class="h4 fw-bold">Meilleur film</h1>
         <section class="bg-white p-4 mb-4 border rounded">
-        <div class="row align-items-start">
-            <div class="col-md-4">
-                <img id="movie-image" alt="Movie Poster" class="img-fluid" style="max-width: 1000px;" src="./static/image1.jpg">
+            <h2 class="h4 fw-bold">Meilleur film</h2>
+            <div class="row align-items-start">
+                <div class="col-md-4">
+                    <img id="movie-image" alt="Movie Poster" class="img-fluid" style="max-width: 1000px;" src="./static/image1.jpg">
+                </div>
+                <div class="col-md-8">
+                    <h3 id="top-title" class="h2 fw-bold mb-3">Chargement...</h3>
+                    <p id="movie-description"></p>
+                </div>
             </div>
-            <div class="col-md-8">
-                <h3 id="top-title" class="h2 fw-bold mb-3">chargement...</h3>
-                <p id="movie-description"></p>
-            </div>
-        </div>
         </section>
 
         <!-- Section Meilleurs Films -->
-        <h2 class="h4 fw-bold">Films les mieux notés </h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Films les mieux notés</h2>
             <div id="top-movies" class="row row-cols-1 g-2 mt-3"></div>
-            <div class="text-center mt-3">
-                <button class="btn btn-primary voir-plus" data-category="top-movies">Voir plus</button>
-            </div>
+            <input type="checkbox" id="toggle-top-movies" class="toggle-checkbox" hidden>
+            <label for="toggle-top-movies" class="btn btn-primary voir-plus"></label>
         </section>
 
-        <!-- Section Catégorie War -->
-        <h2 class="h4 fw-bold">Catégorie : Guerres</h2>
+        <!-- Section Catégorie Guerre -->
         <section class="bg-white p-4 mb-4 border rounded text-center">
-
+            <h2 class="h4 fw-bold">Catégorie : Les Films de Guerre</h2>
             <div id="category-war" class="row row-cols-1 g-2 mt-3"></div>
-            <div class="text-center mt-3">
-                <button class="btn btn-primary voir-plus" data-category="category-war">Voir plus</button>
-            </div>
+            <input type="checkbox" id="toggle-war" class="toggle-checkbox" hidden>
+            <label for="toggle-war" class="btn btn-primary voir-plus"></label>
         </section>
 
-        <!-- Section Catégorie Horror -->
-        <h2 class="h4 fw-bold">Catégorie : Horreurs</h2>
+        <!-- Section Catégorie Horreur -->
         <section class="bg-white p-4 mb-4 border rounded text-center">
+            <h2 class="h4 fw-bold">Catégorie : Les Films d'Horreur</h2>
             <div id="category-horror" class="row row-cols-1 g-2 mt-3"></div>
-            <div class="text-center mt-3">
-                <button class="btn btn-primary voir-plus" data-category="category-horror">Voir plus</button>
-            </div>
+            <input type="checkbox" id="toggle-horror" class="toggle-checkbox" hidden>
+            <label for="toggle-horror" class="btn btn-primary voir-plus"></label>
         </section>
 
         <!-- Section Catégorie 3 -->
-        <h2 class="h4 fw-bold">Catégorie : Autres</h2>
         <section class="bg-white p-4 mb-4 border rounded text-center">
-            <label for="genre-select"></label><select id="genre-select" class="form-select mb-3 mx-auto" style="width: auto;">
+            <h2 class="h4 fw-bold">Catégorie : Autres</h2>
+            <select id="genre-select" class="form-select mb-3 mx-auto" style="width: auto;">
                 <option value="">Choisir un genre</option>
             </select>
             <div id="category-3" class="row row-cols-1 g-2 mt-3"></div>
-            <div class="text-center mt-3">
-                <button class="btn btn-primary voir-plus" data-category="category-3">Voir plus</button>
-            </div>
+            <input type="checkbox" id="toggle-category-3" class="toggle-checkbox" hidden>
+            <label for="toggle-category-3" class="btn btn-primary voir-plus"></label>
         </section>
     </main>
 

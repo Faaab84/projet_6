@@ -2,8 +2,7 @@ const mainUrl = "http://127.0.0.1:8000/api/v1/titles/";
 const genresUrl = "http://127.0.0.1:8000/api/v1/genres/";
 const defaultImage = "./static/image1.jpg";
 
-
-// on vérifie si l'image est accessible, sinon on retourne l'image 1
+// Vérifie si une image est accessible, sinon retourne une image par défaut
 async function checkImage(url) {
     try {
         let response = await fetch(url, { method: 'HEAD' });
@@ -16,7 +15,7 @@ async function checkImage(url) {
     }
 }
 
-// on récupère la liste des genres depuis l'API et on remplit le menu déroulant
+// Récupère la liste des genres depuis l'API et remplit le menu déroulant
 async function getGenres() {
     let genreSelect = document.getElementById('genre-select');
     let genres = [];
@@ -40,23 +39,31 @@ async function getGenres() {
     }
 }
 
-// on récupère une liste de films depuis l'API et les affiche dans une section
+// Récupère une liste de films depuis l'API et les affiche dans une section
 async function getMovies(url, divId, start = 0, count = 6) {
     let div = document.getElementById(divId);
     let movies = [];
 
-    let response = await fetch(url);
-    let data = await response.json();
-    for (let i = 0; i < data.results.length; i++) {
-        movies.push(data.results[i]);
-    }
-
-    if (data.next) {
-        response = await fetch(data.next);
-        let nextData = await response.json();
-        for (let i = 0; i < nextData.results.length; i++) {
-            movies.push(nextData.results[i]);
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+        for (let i = 0; i < data.results.length; i++) {
+            movies.push(data.results[i]);
         }
+
+        // Charger plus de films si nécessaire (jusqu'à 6)
+        let nextUrl = data.next;
+        while (nextUrl && movies.length < count) {
+            response = await fetch(nextUrl);
+            let nextData = await response.json();
+            for (let i = 0; i < nextData.results.length; i++) {
+                movies.push(nextData.results[i]);
+            }
+            nextUrl = nextData.next;
+        }
+    } catch {
+        div.innerHTML = '<p>Erreur chargement films</p>';
+        return;
     }
 
     div.innerHTML = '';
@@ -74,9 +81,8 @@ async function getMovies(url, divId, start = 0, count = 6) {
     for (let i = 0; i < selectedMovies.length; i++) {
         let movie = selectedMovies[i];
         let imageUrl = await checkImage(movie.image_url);
-        let isHidden = (i >= (window.innerWidth < 576 ? 2 : 4) && window.innerWidth < 992) ? 'hidden' : '';
         htmlContent += `
-            <div class="col ${isHidden}" style="cursor: pointer;">
+            <div class="col">
                 <div class="card h-100 text-center">
                     <img src="${imageUrl}" alt="${movie.title}" class="card-img-top mx-auto" style="max-width: 150px;" data-movie-id="${movie.id}">
                     <div class="card-body">
@@ -100,7 +106,7 @@ async function getMovies(url, divId, start = 0, count = 6) {
     }
 }
 
-// on récupère le meilleur film avec le meilleur score IMDB et on l'affiche dans la section "Meilleur film"
+// Récupère le meilleur film (meilleur score IMDB) et l'affiche dans la section "Meilleur film"
 async function getBestMovie() {
     let title = document.getElementById('top-title');
     let image = document.getElementById('movie-image');
@@ -140,7 +146,7 @@ async function getBestMovie() {
     }
 }
 
-// on ouvre une fenetre popup avec les détails d'un film (titre, image, genres, etc.)
+// Ouvre un modal avec les détails d'un film (titre, image, genres, etc.)
 async function openModal(movieId) {
     let modal = document.getElementById('modal');
     let modalContent = document.getElementById('modal-content');
@@ -220,13 +226,15 @@ async function openModal(movieId) {
         });
     }
 }
-// on ferme le modal
+
+// Ferme le modal en le masquant
 function closeModal() {
     let modal = document.getElementById('modal');
     modal.classList.remove('d-block');
     modal.classList.add('d-none');
 }
-//on gere les evenements au demarrage de la page
+
+// Charge les données et configure les interactions au démarrage de la page
 document.addEventListener('DOMContentLoaded', () => {
     getBestMovie();
     getMovies(mainUrl + "?page=1&sort_by=-imdb_score", 'top-movies', 1, 6);
@@ -242,82 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
             getMovies(mainUrl + "?genre=" + genre + "&page=1&sort_by=-imdb_score", 'category-3', 0, 6);
         } else {
             div.innerHTML = '<p>Sélectionnez un genre.</p>';
-        }
-    });
-
-    let buttons = [];
-    let buttonElements = document.getElementsByClassName('voir-plus');
-    for (let i = 0; i < buttonElements.length; i++) {
-        buttons.push(buttonElements[i]);
-    }
-
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', () => {
-            let category = buttons[i].dataset.category;
-            let films = [];
-            let filmElements = document.querySelectorAll(`#${category} .col`);
-            for (let j = 0; j < filmElements.length; j++) {
-                films.push(filmElements[j]);
-            }
-
-            let action;
-            switch (buttons[i].textContent) {
-                case 'Voir plus':
-                    action = 'show';
-                    break;
-                case 'Voir moins':
-                    action = 'hide';
-                    break;
-                default:
-                    action = 'show';
-                    break;
-            }
-
-            if (action === 'show') {
-                for (let j = 0; j < films.length; j++) {
-                    films[j].classList.remove('hidden');
-                }
-                buttons[i].textContent = 'Voir moins';
-            } else {
-                for (let j = 0; j < films.length; j++) {
-                    if (j >= (window.innerWidth < 576 ? 2 : 4)) {
-                        films[j].classList.add('hidden');
-                    }
-                }
-                buttons[i].textContent = 'Voir plus';
-            }
-        });
-    }
-
-    window.addEventListener('resize', () => {
-        let buttons = [];
-        let buttonElements = document.getElementsByClassName('voir-plus');
-        for (let i = 0; i < buttonElements.length; i++) {
-            buttons.push(buttonElements[i]);
-        }
-
-        for (let i = 0; i < buttons.length; i++) {
-            let category = buttons[i].dataset.category;
-            let films = [];
-            let filmElements = document.querySelectorAll(`#${category} .col`);
-            for (let j = 0; j < filmElements.length; j++) {
-                films.push(filmElements[j]);
-            }
-
-            if (window.innerWidth >= 992) {
-                for (let j = 0; j < films.length; j++) {
-                    films[j].classList.remove('hidden');
-                }
-                buttons[i].style.display = 'none';
-            } else {
-                buttons[i].style.display = 'block';
-                buttons[i].textContent = 'Voir plus';
-                for (let j = 0; j < films.length; j++) {
-                    if (j >= (window.innerWidth < 576 ? 2 : 4)) {
-                        films[j].classList.add('hidden');
-                    }
-                }
-            }
         }
     });
 });
