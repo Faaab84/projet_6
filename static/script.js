@@ -2,7 +2,7 @@ const mainUrl = "http://127.0.0.1:8000/api/v1/titles/";
 const genresUrl = "http://127.0.0.1:8000/api/v1/genres/";
 const defaultImage = "./static/image1.jpg";
 
-// Vérifie si une image est accessible, sinon retourne une image par défaut
+//  on vérifie si une image est accessible, sinon retourne une image par défaut
 async function checkImage(url) {
     try {
         let response = await fetch(url, { method: 'HEAD' });
@@ -15,7 +15,7 @@ async function checkImage(url) {
     }
 }
 
-// Récupère la liste des genres depuis l'API et remplit le menu déroulant
+// on récupère la liste des genres depuis l'API et remplit le menu déroulant
 async function getGenres() {
     let genreSelect = document.getElementById('genre-select');
     let genres = [];
@@ -39,7 +39,7 @@ async function getGenres() {
     }
 }
 
-// Récupère une liste de films depuis l'API et les affiche dans une section
+// on récupère une liste de films depuis l'API et les affiche dans une section
 async function getMovies(url, divId, start = 0, count = 6) {
     let div = document.getElementById(divId);
     let movies = [];
@@ -106,7 +106,7 @@ async function getMovies(url, divId, start = 0, count = 6) {
     }
 }
 
-// Récupère le meilleur film (meilleur score IMDB) et l'affiche dans la section "Meilleur film"
+// on récupère le meilleur film (meilleur score IMDB) et l'affiche dans la section "Meilleur film"
 async function getBestMovie() {
     let title = document.getElementById('top-title');
     let image = document.getElementById('movie-image');
@@ -146,7 +146,7 @@ async function getBestMovie() {
     }
 }
 
-// Ouvre un modal avec les détails d'un film (titre, image, genres, etc.)
+// Ouvre un modal avec les détails d'un film
 async function openModal(movieId) {
     let modal = document.getElementById('modal');
     let modalContent = document.getElementById('modal-content');
@@ -227,7 +227,7 @@ async function openModal(movieId) {
     }
 }
 
-// Ferme le modal en le masquant
+// on masque le modal popup
 function closeModal() {
     let modal = document.getElementById('modal');
     modal.classList.remove('d-block');
